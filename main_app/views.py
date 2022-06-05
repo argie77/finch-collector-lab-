@@ -20,6 +20,34 @@ class Home(TemplateView):
         # This is similar to response.send() in express
         #return HttpResponse("Finch Home")
 
+class Finch:
+    def __init__(self, name, image, bio):
+        self.name = name
+        self.image = image
+        self.bio = bio
+
+
+Finches = [
+    Finch("Purple Finch", 
+    "https://www.allaboutbirds.org/guide/assets/og/75714071-1200px.jpg",
+    "sparrow dipped in raspberry juice"),
+    Finch("Gouldian Finch", 
+    "https://upload.wikimedia.org/wikipedia/commons/3/3e/Male_adult_Gouldian_Finch.jpg",
+    "Rainbow"),
+    Finch("Zebra Finch", 
+    "https://lafeber.com/pet-birds/wp-content/uploads/2018/06/Zebra-Finch.jpg",
+    "Seed Eaters")
+]
+
+
+class FinchList(TemplateView):
+    template_name = "finches_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["finches"] = finches # this is where we add the key into our context object for the view to use
+        return context
+
 #...
 class About(TemplateView):
      template_name = "about.html"
